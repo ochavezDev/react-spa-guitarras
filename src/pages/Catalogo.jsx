@@ -1,0 +1,23 @@
+import React from "react";
+import guitarras from "../data/guitarras";
+import GuitarCard from "../components/GuitarCard";
+
+const Catalogo = () => {
+  console.log("Aqui");
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-16">
+      <h1 className="text-4xl font-bold font-serif text-stone-800">
+        Instrumentos de Boutique
+      </h1>
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {guitarras.map((element, index) => (
+            <GuitarCard key={index} guitarra={element} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Catalogo;
