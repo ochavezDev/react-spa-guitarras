@@ -1,16 +1,30 @@
-# React + Vite
+# 🎸 Luthier SPA - Aprendiendo React Router DOM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido al repositorio de **Luthier & Co.**! Este proyecto es una aplicación web de página única (SPA) desarrollada con **React** y **Vite**, estilizada con **Tailwind CSS**, cuyo objetivo principal es dominar el enrutamiento del lado del cliente mediante **React Router DOM**.
 
-Currently, two official plugins are available:
+La aplicación emula una tienda de guitarras de boutique y un taller de luthier, sirviendo como el entorno perfecto para entender el ciclo de vida de las rutas, parámetros dinámicos y diseños anidados.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🎓 Conceptos de React Router DOM Implementados
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A lo largo del desarrollo de este proyecto se han aplicado y consolidado los siguientes pilares de enrutamiento:
 
-## Expanding the ESLint configuration
+### 1. 🔀 Rutas Anidadas y Diseños Globales (`Layout` & `Outlet`)
+En lugar de repetir el `<Header />` y el `<Footer />` en cada página individual, implementamos un diseño base unificado.
+* **`Layout.jsx`**: Actúa como la estructura maestra de la aplicación.
+* **`<Outlet />`**: Funciona como un marcador de posición dinámico. React Router inyectará el componente de la ruta activa (como `Home` o `Catalogo`) exactamente en este espacio, manteniendo el Header y Footer fijos sin renderizados innecesarios.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. 🗺️ Definición de Rutas (`Routes` & `Route`)
+La configuración central de la aplicación mapea las URLs del navegador con sus respectivos componentes de vista:
+* Las rutas estáticas conectan `/`, `/catalogo`, `/contacto` y `/acerca`.
+* Se utiliza un comodín `path="*"` vinculado al componente `Error404.jsx` para capturar cualquier ruta inexistente y mejorar la experiencia de usuario.
+
+### 3. 🔗 Navegación sin Recarga (`Link`)
+En componentes como `Header.jsx`, `Home.jsx` y `GuitarCard.jsx`, se reemplazaron las etiquetas tradicionales `<a>` por `<Link to="...">`. Esto intercepta el clic del navegador, evitando que la página se recargue por completo y logrando una transición instantánea típica de una SPA nativa.
+
+### 4. 🏷️ Rutas Dinámicas y Lectura de Parámetros (`useParams`)
+Para la vista detallada de cada instrumento:
+* En `GuitarCard.jsx` creamos el enlace dinámico apuntando al ID único del producto:  
+  ```jsx
+  <Link to={`/producto/${guitarra.id}`}>
